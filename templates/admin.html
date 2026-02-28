@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Dashboard</title>
+<style>
+body{font-family:Arial;background:#232526;color:white;margin:0;padding:20px;}
+.container{width:95%;margin:auto;}
+.user-box{background:#2a2a2a;padding:20px;margin-bottom:20px;border-radius:10px;}
+.user-title{font-weight:bold;margin-bottom:10px;}
+table{width:100%;border-collapse:collapse;}
+th, td{padding:10px;border:1px solid #444;text-align:center;}
+th{background:#1e3c72;}
+.fake{color:red;font-weight:bold;}
+.genuine{color:green;font-weight:bold;}
+.logout{margin-top:20px;display:inline-block;color:#ccc;text-decoration:none;}
+.logout:hover{color:white;}
+</style>
+</head>
+<body>
+<h2>Admin Dashboard - All Users & Messages</h2>
+<div class="container">
+{% for user in users %}
+<div class="user-box">
+<div class="user-title">
+Username: {{ user.username }} | Email: {{ user.email }} | Phone: {{ user.phone }}
+</div>
+{% if user.messages %}
+<table>
+<tr>
+<th>Message</th>
+<th>Input Time</th>
+<th>Execution Time (ms)</th>
+<th>Result</th>
+</tr>
+{% for msg in user.messages %}
+<tr>
+<td>{{ msg.message }}</td>
+<td>{{ msg.input_time }}</td>
+<td>{{ msg.execution_time_ms }}</td>
+<td class="{{ 'fake' if msg.result=='Fake' else 'genuine' }}">{{ msg.result }}</td>
+</tr>
+{% endfor %}
+</table>
+{% else %}
+<p>No messages submitted yet.</p>
+{% endif %}
+</div>
+{% endfor %}
+<a href="/logout" class="logout">Logout</a>
+</div>
+</body>
+</html>

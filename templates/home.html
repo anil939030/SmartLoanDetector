@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Message Detector</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg,#0f2027,#203a43);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.card {
+    background: rgba(255,255,255,0.05);
+    padding: 40px;
+    border-radius: 25px;
+    width: 500px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 0 40px rgba(0,255,255,0.2);
+}
+
+h2 {
+    margin-bottom: 25px;
+}
+
+textarea {
+    width: 100%;
+    height: 120px;
+    padding: 15px;
+    border-radius: 15px;
+    border: 2px solid transparent;
+    font-size: 14px;
+    resize: none;
+    outline: none;
+    transition: 0.3s;
+}
+
+textarea:focus {
+    border-color: #00f2fe;
+    box-shadow: 0 0 15px #00f2fe;
+}
+
+button {
+    margin-top: 20px;
+    padding: 12px 35px;
+    border: none;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    background: linear-gradient(45deg,#00f2fe,#4facfe);
+    color: white;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+.result-box {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    text-align: left;
+    animation: pop 0.4s ease;
+}
+
+@keyframes pop {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.fake { background: rgba(255,0,0,0.15); border-left: 5px solid #ff4d4d; color: #ff4d4d; }
+.genuine { background: rgba(0,255,100,0.15); border-left: 5px solid #00ff88; color: #00ff88; }
+.warning { background: rgba(255,165,0,0.15); border-left: 5px solid #ffa500; color: #ffa500; }
+
+.detail {
+    font-size: 13px;
+    color: #ccc;
+    margin-top: 5px;
+}
+
+.logout {
+    display: inline-block;
+    margin-top: 25px;
+    font-size: 14px;
+    color: #ccc;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.logout:hover {
+    color: white;
+    text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+<div class="card">
+    <h2>🚀 Welcome {{ user }}</h2>
+
+    <form method="POST">
+        <textarea name="message" placeholder="Paste suspicious message here..." required>{{ message_text }}</textarea>
+        <button type="submit">🔍 Detect Now</button>
+    </form>
+
+    {% if result %}
+    <div class="result-box {% if result=='Fake' %}fake{% elif result=='Genuine' %}genuine{% else %}warning{% endif %}">
+        <div>💬 <strong>Message:</strong> {{ message_text }}</div>
+        <div class="detail">🕒 Input Time: {{ input_time or '-' }}</div>
+        <div class="detail">⚡ Execution Time: {{ exec_time or '-' }} ms</div>
+        <div class="detail">✅ Result: {{ result }}</div>
+    </div>
+    {% endif %}
+
+    <a href="/logout" class="logout">Logout</a>
+</div>
+</body>
+</html>

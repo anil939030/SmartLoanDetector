@@ -1,0 +1,8 @@
+step1:first run cmd "python app.py"
+        "http://127.0.0.1:5000"
+step2:with same WIFI
+        "http://192.168.29.227:5000"
+step3:WithOut Same WIFI
+        second run new cmd open to run"ngrok http 5000"
+        "https://edna-sweetmeal-bulkily.ngrok-free.dev"every time change
+        

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(135deg,#667eea,#764ba2);
+}
+
+/* Project title above card */
+.title {
+    font-size:36px;
+    font-weight:800;
+    margin-bottom:30px;
+    background: linear-gradient(90deg,#00f2fe,#4facfe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 1px 1px 8px rgba(0,0,0,0.4);
+}
+
+/* Card container */
+.card{
+    background:white;
+    padding:40px;
+    width:320px;
+    border-radius:20px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.3);
+    text-align:center;
+    animation:fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* Input fields */
+input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border-radius:10px;
+    border:1px solid #ccc;
+    outline:none;
+    transition:0.3s;
+}
+
+input:focus{
+    border-color:#4facfe;
+    box-shadow:0 0 10px #4facfe;
+}
+
+/* Button */
+button{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:25px;
+    background: linear-gradient(45deg,#00f2fe,#4facfe);
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+    position:relative;
+    overflow:hidden;
+}
+
+button::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background: rgba(255,255,255,0.2);
+    transition:0.5s;
+}
+
+button:hover::before{
+    left:100%;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+/* Links */
+a{
+    display:block;
+    margin-top:10px;
+    color:#667eea;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+a:hover{
+    color:#4facfe;
+}
+
+/* Error message */
+.error{
+    color:red;
+    margin:5px 0;
+    font-weight:600;
+}
+</style>
+</head>
+<body>
+
+<!-- Project title above box -->
+<div class="title">Smart Loan Detector</div>
+
+<div class="card">
+    {% if error %}
+    <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST">
+        <input name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button>Login</button>
+    </form>
+
+    <a href="/signup">Create Account</a>
+    <a href="/forgot">Forgot Password</a>
+</div>
+
+</body>
+</html>
